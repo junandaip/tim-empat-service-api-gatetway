@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use GuzzleHttp\Client;
+
 use Closure;
 
 class LoginMiddleware
@@ -15,18 +17,32 @@ class LoginMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if ($request->input('token')) {
-            
-            $check = "l1F8luYzl3XEPjU0495KOQ7pWroq1zIDk6zXdookmymjr1hxgOEIpUQmdd4vxyyAsLXPSjvWDXYtDVBj";
-            // $check =  User::where('token', $request->input('token'))->first();
+        $_client = new Client([
+            #Edit sesuai IP server service User
+            'base_uri' => 'http://localhost:8000/'
+        ]);
+        $getUsers = $_client->request('GET', 'users/');
+        $dataUser = json_decode($getUsers->getBody()->getContents(), true);
+        $token = $request->input('token');
 
+        $found = in_array($token, array_column($dataUser, 'token'));
+        if ($token) {
+            $check = $found;
             if (!$check) {
-                return response('Token Tidak Valid.', 401);
+                $out = [
+                    "message" => "Token Tidak Valid",
+                    "code" => 401
+                ];
+                return response()->json($out, $out['code']);
             } else {
                 return $next($request);
             }
         } else {
-            return response('Silahkan Masukkan Token.', 401);
+            $out = [
+                "message" => "Masukkan Token",
+                "code" => 401
+            ];
+            return response()->json($out, $out['code']);
         }
     }
 }
