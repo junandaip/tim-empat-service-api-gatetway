@@ -89,4 +89,37 @@ class AuthController extends Controller
             ]);
         }
     }
+
+    public function logout(Request $request)
+    {
+        $this->validate($request, [
+            'username' => 'required',
+        ]);
+
+        $username = $request->input("username");
+
+        $data = [
+            "username" => $username
+        ];
+
+        $response = $this->_client->request('POST', 'logout', [
+            'http_errors' => false,
+            'form_params' => $data
+        ]);
+
+        $result = json_decode($response->getBody()->getContents(), true);
+
+        if ($response->getStatusCode() == 200) {
+            return response()->json([
+                'result' => $result,
+                'message' => $response->getReasonPhrase(),
+                'Code' => $response->getStatusCode()
+            ]);
+        } else {
+            return response()->json([
+                'message' => "Logout failed",
+                'Code' => $response->getStatusCode()
+            ]);
+        }
+    }
 }

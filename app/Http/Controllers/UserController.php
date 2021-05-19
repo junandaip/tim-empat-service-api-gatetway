@@ -18,6 +18,22 @@ class UserController extends Controller
         ]);
     }
 
+    public function index(){
+        $response = $this->_client->request('GET', 'users/', ['http_errors' => false]);
+        $result = json_decode($response->getBody()->getContents(), true);
+        if ($response->getStatusCode() == 200) {
+            return response()->json([
+                'result' => $result,
+                'message' => $response->getReasonPhrase(),
+                'Code' => $response->getStatusCode()
+            ]);
+        } else {
+            return response()->json([
+                'message' => "User not found",
+                'Code' => $response->getStatusCode()
+            ]);
+        }
+    }
     public function getUsername($username)
     {
         $username = urldecode($username);

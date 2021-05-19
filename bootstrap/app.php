@@ -60,6 +60,7 @@ $app->singleton(
 */
 
 $app->configure('app');
+// $app->configure('session');
 
 /*
 |--------------------------------------------------------------------------
@@ -84,6 +85,19 @@ $app->routeMiddleware([
     'login' => App\Http\Middleware\LoginMiddleware::class,
 ]);
 
+$app->middleware([
+    App\Http\Middleware\CorsMiddleware::class
+]);
+
+// $app->middleware([
+//     \Illuminate\Session\Middleware\StartSession::class,
+// ]);
+
+// $app->bind(\Illuminate\Session\SessionManager::class, function () use ($app) {
+//     return new \Illuminate\Session\SessionManager($app);
+// });
+
+
 /*
 |--------------------------------------------------------------------------
 | Register Service Providers
@@ -94,6 +108,8 @@ $app->routeMiddleware([
 | totally optional, so you are not required to uncomment this line.
 |
 */
+
+$app->register(App\Providers\CatchAllOptionsRequestsProvider::class);
 
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);

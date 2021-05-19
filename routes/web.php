@@ -21,9 +21,13 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->post("/register", "AuthController@register");
 
     $router->post("/login", "AuthController@login");
+
+    $router->post("/logout", "AuthController@logout");
 });
 
 $router->group(['prefix' => 'api/user', 'middleware' => ['login']], function () use ($router) {
+    
+    $router->get('/', 'UserController@index');
 
     $router->get('/{username}', 'UserController@getUsername');
 
@@ -46,7 +50,7 @@ $router->group(['prefix' => 'api/book', 'middleware' => ['login']], function () 
     $router->delete('/{id}', 'BooksController@deletebyId');
 });
 
-$router->group(['prefix' => 'api/peminjaman', 'middleware' => ['login']], function () use ($router) { 
+$router->group(['prefix' => 'api/pinjam', 'middleware' => ['login']], function () use ($router) { 
 
     $router->get('/{username}', 'PeminjamanController@showPinjaman');
 
