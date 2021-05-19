@@ -17,7 +17,7 @@ class PeminjamanController extends Controller {
     }
 
     public function showPinjaman($username){
-        $response = $this->_client->request('GET', 'peminjamans/' . $username, ['http_errors' => false]);
+        $response = $this->_client->request('GET', 'peminjamans/' . $username);
         $result = json_decode($response->getBody()->getContents(), true);
 
         if ($response->getStatusCode() == 200) {
