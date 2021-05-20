@@ -85,6 +85,11 @@ $app->routeMiddleware([
     'login' => App\Http\Middleware\LoginMiddleware::class,
 ]);
 
+$app->middleware([
+    App\Http\Middleware\CorsMiddleware::class
+]);
+
+$app->register(App\Providers\CatchAllOptionsRequestsProvider::class);
 
 // $app->middleware([
 //     \Illuminate\Session\Middleware\StartSession::class,
@@ -105,23 +110,6 @@ $app->routeMiddleware([
 | totally optional, so you are not required to uncomment this line.
 |
 */
-
-/*
-|--------------------------------------------------------------------------
-| Register Middleware
-|--------------------------------------------------------------------------
-*/
-$app->middleware([
-    App\Http\Middleware\CorsMiddleware::class
-]);
-
-
-/*
-|--------------------------------------------------------------------------
-| Register Service Providers
-|--------------------------------------------------------------------------
-*/
-$app->register(App\Providers\CatchAllOptionsRequestsProvider::class);
 
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
