@@ -108,7 +108,7 @@ class AuthController extends Controller
 
         $result = json_decode($response->getBody()->getContents(), true);
 
-        if ($response->getStatusCode() == 200 || $response->getStatusCode() == 201) {
+        if ($response->getStatusCode()) {
             return response()->json([
                 'result' => $result,
                 'message' => $response->getReasonPhrase(),
