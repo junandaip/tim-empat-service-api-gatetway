@@ -103,13 +103,12 @@ class AuthController extends Controller
         ];
 
         $response = $this->_client->request('POST', 'logout', [
-            'http_errors' => false,
             'form_params' => $data
         ]);
 
         $result = json_decode($response->getBody()->getContents(), true);
 
-        if ($response->getStatusCode() == 200) {
+        if ($response->getStatusCode() == 200 || $response->getStatusCode() == 201) {
             return response()->json([
                 'result' => $result,
                 'message' => $response->getReasonPhrase(),
