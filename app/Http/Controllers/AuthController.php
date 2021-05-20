@@ -13,7 +13,7 @@ class AuthController extends Controller
     {
         $this->_client = new Client([
             #Edit sesuai IP server service User
-            'base_uri' => 'http://localhost:8000/'
+            'base_uri' => 'https://mservice-user-service.herokuapp.com/'
         ]);
     }
 

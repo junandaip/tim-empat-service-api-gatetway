@@ -12,7 +12,7 @@ class PeminjamanController extends Controller {
     {
         $this->_client = new Client([
             #Edit sesuai IP server service Peminjaman
-            'base_uri' => 'http://localhost:8091/'
+            'base_uri' => 'hthttps://ms-pinjam-service.herokuapp.com/'
         ]);
     }
 

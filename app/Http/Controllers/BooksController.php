@@ -14,7 +14,7 @@ class BooksController extends Controller
     {
         $this->_client = new Client([
             #Edit sesuai IP server service Book
-            'base_uri' => 'http://localhost:8090/'
+            'base_uri' => 'https://ms-books-service.herokuapp.com/'
         ]);
     }
 
