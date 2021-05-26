@@ -58,7 +58,7 @@ class PeminjamanController extends Controller {
                 'result' => $result,
                 'message' => $response->getReasonPhrase(),
                 'Code' => $response->getStatusCode()
-            ]);
+            ], 201);
         } else {
             return response()->json([
                 'message' => "Peminjaman gagal",
