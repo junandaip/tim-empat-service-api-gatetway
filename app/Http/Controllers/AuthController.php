@@ -36,7 +36,7 @@ class AuthController extends Controller
         ];
 
         $response = $this->_client->request('POST', 'register', [
-            'http_errors' => false,
+            'http_errors' => true,
             'form_params' => $data
         ]);
         $result = json_decode($response->getBody()->getContents(), true);
@@ -70,7 +70,7 @@ class AuthController extends Controller
         ];
 
         $response = $this->_client->request('POST', 'login', [
-            'http_errors' => false,
+            'http_errors' => true,
             'form_params' => $data
         ]);
 

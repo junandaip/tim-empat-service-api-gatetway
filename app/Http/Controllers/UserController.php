@@ -19,7 +19,7 @@ class UserController extends Controller
     }
 
     public function index(){
-        $response = $this->_client->request('GET', 'users/', ['http_errors' => false]);
+        $response = $this->_client->request('GET', 'users/', ['http_errors' => true]);
         $result = json_decode($response->getBody()->getContents(), true);
         if ($response->getStatusCode() == 200) {
             return response()->json([
@@ -38,7 +38,7 @@ class UserController extends Controller
     {
         $username = urldecode($username);
 
-        $response = $this->_client->request('GET', 'user/' . $username, ['http_errors' => false]);
+        $response = $this->_client->request('GET', 'user/' . $username, ['http_errors' => true]);
 
         $result = json_decode($response->getBody()->getContents(), true);
         if ($response->getStatusCode() == 200) {

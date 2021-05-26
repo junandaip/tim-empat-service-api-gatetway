@@ -49,7 +49,7 @@ class PeminjamanController extends Controller {
         ];
 
         $response = $this->_client->request('POST', 'pinjaman', [
-            'http_errors' => false,
+            'http_errors' => true,
             'form_params' => $data
         ]);
         $result = json_decode($response->getBody()->getContents(), true);
@@ -69,7 +69,7 @@ class PeminjamanController extends Controller {
 
     public function destroy($id) {
         $response = $this->_client->request('DELETE', 'peminjamans/' . $id, [
-            'http_errors' => false,
+            'http_errors' => true,
             'form_params' => [ 
                 'id' => $id 
             ]

@@ -37,7 +37,7 @@ class BooksController extends Controller
 
     public function getId($id)
     {
-        $response = $this->_client->request('GET', 'book/id/' . $id, ['http_errors' => false]);
+        $response = $this->_client->request('GET', 'book/id/' . $id, ['http_errors' => true]);
         $result = json_decode($response->getBody()->getContents(), true);
 
         if ($response->getStatusCode() == 200) {
@@ -58,7 +58,7 @@ class BooksController extends Controller
     {
 
         $judul = urldecode($judul);
-        $response = $this->_client->request('GET', 'book/judul/' . $judul, ['http_errors' => false]);
+        $response = $this->_client->request('GET', 'book/judul/' . $judul, ['http_errors' => true]);
         $result = json_decode($response->getBody()->getContents(), true);
 
         if ($response->getStatusCode() == 200) {
@@ -97,7 +97,7 @@ class BooksController extends Controller
         ];
 
         $response = $this->_client->request('POST', 'book', [
-            'http_errors' => false,
+            'http_errors' => true,
             'form_params' => $data
         ]);
         $result = json_decode($response->getBody()->getContents(), true);
@@ -162,7 +162,7 @@ class BooksController extends Controller
     public function deleteById($id)
     {
         $response = $this->_client->request('DELETE', 'book/' . $id, [
-            'http_errors' => false,
+            'http_errors' => true,
             'form_params' => [ 
                 'id' => $id 
             ]
